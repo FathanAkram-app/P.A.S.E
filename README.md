@@ -1,4 +1,5 @@
 # 🚀 P.A.S.E - Pet Animal Space Entity
+Quick demo https://www.youtube.com/watch?v=KB9RvOvM3Wk
 
 A next-generation digital pet NFT game built with React, featuring real-time AI chat, 1v1 battle arena, and blockchain integration. Your Pet Animal Space Entity lives, grows, and battles in a beautiful cosmic universe.
 
@@ -46,7 +47,7 @@ A next-generation digital pet NFT game built with React, featuring real-time AI 
 1. **Clone the repository**
    ```bash
    git clone [your-repo-url]
-   cd Tamagochi
+   cd reponame
    ```
 
 2. **Install dependencies**
