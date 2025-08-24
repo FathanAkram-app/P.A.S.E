@@ -30,12 +30,15 @@ After deployment, you'll get a URL like:
 - Preview: `https://p-a-s-e-[hash].vercel.app`
 - Production: `https://pase.yourdomain.com` (with custom domain)
 
-## ⚙️ Environment Variables Setup
+## ⚙️ Environment Variables Setup (Optional)
+
+**Important**: The game works perfectly without any environment variables! Only add these if you want enhanced features.
 
 ### In Vercel Dashboard:
-1. Go to your project settings
-2. Navigate to "Environment Variables"
-3. Add these optional variables:
+1. Go to your deployed project
+2. Click "Settings" tab
+3. Navigate to "Environment Variables" 
+4. Add these optional variables (one by one):
 
 **AI Services (Optional - Game works without these):**
 ```
@@ -141,8 +144,10 @@ vercel --prod
 
 **Environment Variables Not Working:**
 - Ensure variables start with `REACT_APP_`
-- Redeploy after adding new variables
+- **Important**: Add variables in Vercel dashboard AFTER deployment
+- Redeploy after adding new variables (Settings → Deployments → Redeploy)
 - Check variable names match exactly
+- **Note**: Game works without any variables - they're optional enhancements only
 
 **Game Not Loading:**
 - Check browser console for errors

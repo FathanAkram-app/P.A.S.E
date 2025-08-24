@@ -23,9 +23,6 @@
     }
   ],
   "env": {
-    "REACT_APP_OPENAI_API_KEY": "@react_app_openai_api_key",
-    "REACT_APP_STABILITY_API_KEY": "@react_app_stability_api_key",
-    "REACT_APP_PINATA_API_KEY": "@react_app_pinata_api_key",
-    "REACT_APP_PINATA_SECRET_KEY": "@react_app_pinata_secret_key"
+    "GENERATE_SOURCEMAP": "false"
   }
 }
