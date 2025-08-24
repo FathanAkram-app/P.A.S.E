@@ -1,0 +1,985 @@
+/* Reset and Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  background: 
+    radial-gradient(ellipse at top, #1a0033 0%, #000000 100%),
+    linear-gradient(180deg, #0a0015 0%, #1a0033 50%, #000000 100%);
+  color: #e0e7ff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated stars background */
+.App::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.4), transparent);
+  background-repeat: repeat;
+  background-size: 150px 80px;
+  animation: stars 25s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes stars {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-80px); }
+}
+
+/* Full screen game */
+.fullscreen-game {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+}
+
+/* Compact Header */
+.compact-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.4);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.game-logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #8b5cf6, #06b6d4, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.compact-btn {
+  background: rgba(139, 92, 246, 0.8);
+  border: 1px solid rgba(139, 92, 246, 0.6);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.compact-btn:hover {
+  background: rgba(139, 92, 246, 1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+}
+
+.compact-btn.active {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.wallet-display {
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Floating Card System */
+.ui-overlay {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.card-container {
+  position: absolute;
+  pointer-events: auto;
+}
+
+.ui-card {
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(139, 92, 246, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  animation: cardSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cardSlideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+.card-header {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.1));
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e0e7ff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title::before {
+  content: '';
+  width: 3px;
+  height: 12px;
+  background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+  border-radius: 2px;
+}
+
+.card-close {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  color: #fca5a5;
+  transition: all 0.2s ease;
+}
+
+.card-close:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: white;
+}
+
+.card-content {
+  padding: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar */
+.card-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.card-content::-webkit-scrollbar-track {
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 2px;
+}
+
+.card-content::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.4);
+  border-radius: 2px;
+}
+
+.card-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.6);
+}
+
+/* Card Positioning */
+.stats-card {
+  top: 16px;
+  left: 16px;
+  width: 280px;
+}
+
+.marketplace-card {
+  top: 16px;
+  right: 16px;
+  width: 360px;
+}
+
+.battle-card {
+  top: 16px;
+  right: 392px;
+  width: 340px;
+}
+
+.chat-card {
+  bottom: 16px;
+  left: 16px;
+  width: 340px;
+  height: 380px;
+}
+
+.chat-card .card-content {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 49px);
+}
+
+/* Component Overrides for Compactness */
+.card-content > * {
+  font-size: 0.85rem !important;
+  line-height: 1.4 !important;
+}
+
+.card-content h1,
+.card-content h2,
+.card-content h3 {
+  font-size: 0.95rem !important;
+  margin-bottom: 8px !important;
+}
+
+.card-content p {
+  margin-bottom: 6px !important;
+}
+
+.card-content button {
+  font-size: 0.8rem !important;
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+  margin: 2px !important;
+}
+
+.card-content input,
+.card-content textarea {
+  font-size: 0.85rem !important;
+  padding: 8px 10px !important;
+  border-radius: 6px !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+  color: #e0e7ff !important;
+}
+
+.card-content input:focus,
+.card-content textarea:focus {
+  border-color: rgba(139, 92, 246, 0.6) !important;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.1) !important;
+}
+
+/* Clean up existing component styles */
+.card-content .stats-panel,
+.card-content .marketplace,
+.card-content .battle-arena,
+.card-content .chat-interface {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  backdrop-filter: none !important;
+}
+
+/* Stats specific styling */
+.card-content .stat-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 6px 0 !important;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.1) !important;
+}
+
+.card-content .stat-row:last-child {
+  border-bottom: none !important;
+}
+
+/* Battle Arena specific */
+.card-content .battle-status {
+  background: rgba(139, 92, 246, 0.1) !important;
+  border-radius: 6px !important;
+  padding: 8px !important;
+  margin: 8px 0 !important;
+}
+
+/* Battle Arena 1v1 Interface */
+.battle-card .card-content .battle-arena-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  margin: 16px 0 !important;
+}
+
+.battle-card .card-content .battle-title {
+  font-size: 14px !important;
+  font-weight: bold !important;
+  margin-bottom: 12px !important;
+  color: #8b5cf6 !important;
+}
+
+.battle-card .card-content .battle-fighters {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  margin: 8px 0 !important;
+  padding: 8px !important;
+  background: rgba(139, 92, 246, 0.05) !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(139, 92, 246, 0.2) !important;
+}
+
+.battle-card .card-content .fighter {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 2px !important;
+  flex: 1 !important;
+}
+
+.battle-card .card-content .fighter-avatar {
+  font-size: 18px !important;
+  margin-bottom: 2px !important;
+}
+
+.battle-card .card-content .fighter-name {
+  font-size: 9px !important;
+  font-weight: bold !important;
+  color: #e2e8f0 !important;
+  text-align: center !important;
+}
+
+.battle-card .card-content .fighter-level {
+  font-size: 8px !important;
+  color: rgba(226, 232, 240, 0.7) !important;
+}
+
+.battle-card .card-content .my-fighter {
+  border-right: 1px solid rgba(139, 92, 246, 0.2) !important;
+}
+
+.battle-card .card-content .opponent-fighter {
+  border-left: 1px solid rgba(139, 92, 246, 0.2) !important;
+}
+
+.battle-card .card-content .vs-indicator {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 8px !important;
+}
+
+.battle-card .card-content .vs-text {
+  font-size: 10px !important;
+  font-weight: bold !important;
+  color: #8b5cf6 !important;
+  padding: 4px 6px !important;
+  background: rgba(139, 92, 246, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+.battle-card .card-content .battle-animation {
+  font-size: 16px !important;
+  animation: battlePulse 0.5s ease-in-out infinite alternate !important;
+}
+
+@keyframes battlePulse {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(1.2); opacity: 0.7; }
+}
+
+.battle-card .card-content .battle-info {
+  background: rgba(139, 92, 246, 0.05) !important;
+  border-radius: 8px !important;
+  padding: 8px !important;
+  margin: 12px 0 !important;
+}
+
+.battle-card .card-content .battle-cost-info {
+  font-size: 10px !important;
+  line-height: 1.4 !important;
+}
+
+.battle-card .card-content .battle-cost-info > div {
+  margin-bottom: 2px !important;
+}
+
+.battle-card .card-content .battle-btn {
+  width: 100% !important;
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 10px 16px !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: white !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  margin: 8px 0 !important;
+}
+
+.battle-card .card-content .battle-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4) !important;
+}
+
+.battle-card .card-content .battle-btn:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+.battle-card .card-content .battle-status {
+  text-align: center !important;
+  padding: 12px !important;
+  margin: 8px 0 !important;
+}
+
+.battle-card .card-content .battle-text {
+  font-size: 12px !important;
+  font-weight: bold !important;
+  color: #8b5cf6 !important;
+  margin-bottom: 4px !important;
+}
+
+.battle-card .card-content .battle-subtext {
+  font-size: 9px !important;
+  opacity: 0.7 !important;
+}
+
+.battle-card .card-content .prototype-notice {
+  text-align: center !important;
+  margin-top: 8px !important;
+  opacity: 0.6 !important;
+}
+
+.battle-card .card-content .prototype-notice small {
+  font-size: 8px !important;
+}
+
+/* Full Screen Battle Result Modal */
+.battle-result-modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.85) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 9999 !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.battle-result-content {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: 2px solid rgba(139, 92, 246, 0.6) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  max-width: 300px !important;
+  width: 90% !important;
+  text-align: center !important;
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.4) !important;
+  animation: modalSlideIn 0.3s ease-out !important;
+}
+
+.battle-result-content h3 {
+  font-size: 18px !important;
+  margin: 0 0 12px 0 !important;
+  color: #e2e8f0 !important;
+}
+
+.battle-result-content .result-message {
+  font-size: 14px !important;
+  color: #e2e8f0 !important;
+  margin-bottom: 16px !important;
+  font-weight: bold !important;
+}
+
+
+.close-result-btn {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 10px 20px !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  color: white !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  width: 100% !important;
+}
+
+.close-result-btn:hover {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5) !important;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Marketplace specific */
+.card-content .nft-item {
+  background: rgba(139, 92, 246, 0.05) !important;
+  border: 1px solid rgba(139, 92, 246, 0.2) !important;
+  border-radius: 6px !important;
+  padding: 8px !important;
+  margin: 4px 0 !important;
+}
+
+/* Chat Interface Complete Override - Reset Everything */
+.chat-card .card-content .chat-interface {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  padding: 12px !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  position: relative !important;
+}
+
+.chat-card .card-content .chat-interface::before {
+  display: none !important;
+}
+
+.chat-card .card-content .chat-header {
+  padding: 0 0 8px 0 !important;
+  margin-bottom: 8px !important;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.chat-card .card-content .connection-status {
+  font-size: 10px !important;
+  opacity: 0.7 !important;
+}
+
+.chat-card .card-content .chat-messages {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  padding: 0 4px 0 0 !important;
+  margin: 0 0 10px 0 !important;
+  max-height: 200px !important;
+  height: auto !important;
+  background: none !important;
+}
+
+.chat-card .card-content .chat-messages::-webkit-scrollbar {
+  width: 3px !important;
+}
+
+.chat-card .card-content .chat-messages::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.chat-card .card-content .chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3) !important;
+  border-radius: 2px !important;
+}
+
+/* Simplified Message Layout */
+.chat-card .card-content .message {
+  margin-bottom: 6px !important;
+  width: 100% !important;
+  display: block !important;
+  clear: both !important;
+}
+
+.chat-card .card-content .message.user-message {
+  text-align: right !important;
+}
+
+.chat-card .card-content .message.pet-message {
+  text-align: left !important;
+}
+
+.chat-card .card-content .message-content {
+  display: inline-block !important;
+  position: relative !important;
+  max-width: 75% !important;
+}
+
+.chat-card .card-content .user-message .message-content {
+  text-align: right !important;
+}
+
+.chat-card .card-content .pet-message .message-content {
+  text-align: left !important;
+}
+
+/* Hide Avatars for Cleaner Look */
+.chat-card .card-content .pet-avatar,
+.chat-card .card-content .user-avatar {
+  display: none !important;
+}
+
+/* Readable Message Bubbles */
+.chat-card .card-content .message-bubble {
+  background: rgba(139, 92, 246, 0.12) !important;
+  border: 1px solid rgba(139, 92, 246, 0.2) !important;
+  border-radius: 10px !important;
+  padding: 8px 12px !important;
+  display: inline-block !important;
+  text-align: left !important;
+  word-wrap: break-word !important;
+  max-width: 100% !important;
+}
+
+.chat-card .card-content .user-message .message-bubble {
+  background: rgba(6, 182, 212, 0.12) !important;
+  border-color: rgba(6, 182, 212, 0.2) !important;
+}
+
+.chat-card .card-content .pet-message .message-bubble {
+  background: rgba(139, 92, 246, 0.12) !important;
+  border-color: rgba(139, 92, 246, 0.2) !important;
+}
+
+/* Readable Text Inside Bubbles */
+.chat-card .card-content .message-bubble p {
+  margin: 0 !important;
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+  color: #e2e8f0 !important;
+}
+
+.chat-card .card-content .message-time {
+  font-size: 9px !important;
+  color: rgba(224, 231, 255, 0.6) !important;
+  margin: 2px 0 0 0 !important;
+  display: block !important;
+}
+
+.chat-card .card-content .typing-indicator {
+  display: flex !important;
+  gap: 2px !important;
+  align-items: center !important;
+}
+
+.chat-card .card-content .typing-indicator span {
+  width: 4px !important;
+  height: 4px !important;
+  background: #8b5cf6 !important;
+  border-radius: 50% !important;
+  animation: typing 1.4s infinite ease-in-out !important;
+}
+
+.chat-card .card-content .typing-indicator span:nth-child(1) { animation-delay: -0.32s !important; }
+.chat-card .card-content .typing-indicator span:nth-child(2) { animation-delay: -0.16s !important; }
+
+@keyframes typing {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.chat-card .card-content .quick-actions {
+  display: flex !important;
+  gap: 3px !important;
+  padding: 6px 0 !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+}
+
+.chat-card .card-content .quick-actions::-webkit-scrollbar {
+  height: 2px !important;
+}
+
+.chat-card .card-content .quick-actions::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3) !important;
+  border-radius: 1px !important;
+}
+
+.chat-card .card-content .quick-action-btn {
+  background: rgba(139, 92, 246, 0.15) !important;
+  border: 1px solid rgba(139, 92, 246, 0.25) !important;
+  border-radius: 12px !important;
+  padding: 4px 8px !important;
+  font-size: 10px !important;
+  color: #e2e8f0 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  min-width: 55px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.chat-card .card-content .quick-action-btn:hover:not(:disabled) {
+  background: rgba(139, 92, 246, 0.25) !important;
+  border-color: rgba(139, 92, 246, 0.4) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 1px 4px rgba(139, 92, 246, 0.2) !important;
+}
+
+.chat-card .card-content .quick-action-btn:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+.chat-card .card-content .chat-input-form {
+  border-top: 1px solid rgba(139, 92, 246, 0.15) !important;
+  padding-top: 8px !important;
+  margin: 0 !important;
+}
+
+.chat-card .card-content .input-group {
+  display: flex !important;
+  gap: 6px !important;
+  width: 100% !important;
+  align-items: center !important;
+}
+
+.chat-card .card-content .chat-input {
+  flex: 1 !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+  border-radius: 16px !important;
+  padding: 6px 12px !important;
+  font-size: 11px !important;
+  color: #e2e8f0 !important;
+  outline: none !important;
+  transition: border-color 0.2s ease !important;
+  height: 28px !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+}
+
+.chat-card .card-content .chat-input:focus {
+  border-color: rgba(139, 92, 246, 0.6) !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.1) !important;
+}
+
+.chat-card .card-content .chat-input::placeholder {
+  color: rgba(226, 232, 240, 0.5) !important;
+  font-size: 11px !important;
+}
+
+.chat-card .card-content .chat-input:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+.chat-card .card-content .send-button {
+  background: linear-gradient(45deg, rgba(139, 92, 246, 0.7), rgba(6, 182, 212, 0.7)) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 24px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 9px !important;
+  color: white !important;
+  transition: transform 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.chat-card .card-content .send-button:hover:not(:disabled) {
+  transform: scale(1.05) !important;
+  background: linear-gradient(45deg, rgba(139, 92, 246, 1), rgba(6, 182, 212, 1)) !important;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.4) !important;
+}
+
+.chat-card .card-content .send-button:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Hide All Debug Elements */
+.chat-card .card-content .chat-input-form > div[style*="font-size: 10px"],
+.chat-card .card-content .chat-input-form > div[style*="color: #666"],
+.chat-card .card-content div[style*="Debug:"],
+.chat-card .card-content [style*="fontSize: '10px'"] {
+  display: none !important;
+}
+
+/* Force Clean Layout - Override All Original ChatInterface Styles */
+.chat-card .card-content .chat-interface * {
+  box-sizing: border-box !important;
+}
+
+.chat-card .card-content .chat-interface,
+.chat-card .card-content .chat-interface *:not(.message-bubble):not(.quick-action-btn):not(.chat-input):not(.send-button) {
+  background-image: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  animation: none !important;
+}
+
+/* Quick Action Bar */
+.quick-actions {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 80;
+}
+
+.quick-action {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  border: 1px solid rgba(139, 92, 246, 0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+}
+
+.quick-action:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 24px rgba(139, 92, 246, 0.6);
+}
+
+.quick-action.active {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.4);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .compact-header {
+    padding: 0 12px;
+  }
+  
+  .header-controls {
+    gap: 6px;
+  }
+  
+  .compact-btn {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+  
+  .stats-card,
+  .marketplace-card,
+  .battle-card {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+  }
+  
+  .battle-card {
+    right: 12px;
+  }
+  
+  .chat-card {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    height: 300px;
+  }
+  
+  .quick-actions {
+    bottom: 12px;
+    right: 12px;
+    flex-direction: row;
+  }
+  
+  .quick-action {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-logo {
+    font-size: 1rem;
+  }
+  
+  .ui-card {
+    border-radius: 8px;
+  }
+  
+  .card-header {
+    padding: 10px 12px;
+  }
+  
+  .card-content {
+    padding: 12px;
+    max-height: 280px;
+  }
+  
+  .quick-action {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "pase-pet-animal-space-entity",
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "headers": {
+        "cache-control": "s-maxage=31536000,immutable"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "REACT_APP_OPENAI_API_KEY": "@react_app_openai_api_key",
+    "REACT_APP_STABILITY_API_KEY": "@react_app_stability_api_key",
+    "REACT_APP_PINATA_API_KEY": "@react_app_pinata_api_key",
+    "REACT_APP_PINATA_SECRET_KEY": "@react_app_pinata_secret_key"
+  }
+}
