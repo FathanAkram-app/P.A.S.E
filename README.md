@@ -18,12 +18,13 @@ A next-generation digital pet NFT game built with React, featuring real-time AI 
 - **Quick Actions**: Instant buttons for common P.A.S.E care activities
 - **Space Entity Personality**: Your P.A.S.E has unique cosmic personality and responses
 
-### ⚔️ Battle Arena (1v1 Combat)
+### ⚔️ Battle Arena (Prototype)
 - **Real 1v1 Battles**: Face off against random opponents with visual fighter display
-- **50/50 Fair Chance**: Completely random battle outcomes (no level advantage)
-- **ETH Wagering**: 0.0002 ETH entry fee, 0.0004 ETH winner reward (prototype)
+- **50/50 Random Outcomes**: Prototype uses completely random results (no level advantage yet)
+- **ETH Wagering**: 0.0002 ETH entry fee, 0.0004 ETH winner reward (prototype only)
 - **Battle Animation**: 2-second combat with lightning effects
 - **Full-screen Results**: Clear win/lose notifications with earnings
+- **Note**: Full game will feature level-based advantage system
 
 ### 🖼️ NFT System
 - **P.A.S.E Minting**: Convert your P.A.S.E into tradeable NFTs with metadata
@@ -188,8 +189,9 @@ Type these commands in the chat or use quick action buttons:
 2. Ensure your P.A.S.E is alive and healthy
 3. Click **"⚔️ START BATTLE!"** 
 4. Watch 2-second 1v1 combat animation
-5. 50/50 chance: Win 0.0004 ETH or lose 0.0002 ETH entry fee
-6. Full-screen result modal shows outcome
+5. **Prototype**: 50/50 random chance (full game will use level advantage)
+6. Win 0.0004 ETH or lose 0.0002 ETH entry fee
+7. Full-screen result modal shows outcome
 
 ### P.A.S.E Evolution & Levels
 - **Experience**: Gained through all interactions (+3 to +8 per action)
@@ -415,6 +417,7 @@ Type these in chat for testing:
 - ✅ Local storage persistence and wallet integration
 
 ### 🔄 Phase 2: Enhanced Prototype (IN PROGRESS)
+- 🔄 Level-based battle system (replace 50/50 random with strategic combat)
 - 🔄 Real ETH transactions for battle wagering
 - 🔄 Improved battle animations and visual effects
 - 🔄 Pet breeding system between NFTs
